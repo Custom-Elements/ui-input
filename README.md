@@ -36,7 +36,7 @@ will normalized that behavior and merrily bubble them.
 
 ##Attributes and Change Handlers
 ###multiline
-Set this to true to allow multiple lines of input.
+Set this to true to create a multiline, self resizing input.
 ###value
 This will contain the user's typed text, and will be updated live with each
 keypress.
@@ -44,12 +44,8 @@ keypress.
 Text to prompt the user before they start to input.
 ###disabled
 When true, the field won't take a focus.
-###rows
-Number of rows to show in a multiline input, if not specified this will default to
-`fit`, which will autogrow. Which is almost certainly what you want.
 ###icon
 A [FontAwesome](http://fontawesome.io/) icon, just put it in like `fa-eye`.
-
 
 ##Methods
 ###resize

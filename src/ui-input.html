@@ -1,10 +1,10 @@
-<polymer-element name="ui-input" attributes="value multiline icon placeholder disabled rows">
+<polymer-element name="ui-input" attributes="value multiline icon placeholder disabled">
 <template>
   <link rel="stylesheet" type="text/css" href="./ui-input.css">
   <section id="field" on-keydown="{{keydown}}" class="{{ {disabled: disabled} | tokenList }}">
     <i id="icon" class="fa {{icon}}"></i>
     <template if="{{multiline}}">
-      <textarea id="input" value="{{value}}" rows="{{rows}}" fit?="{{rows === 'fit'}}" disabled?="{{disabled}}" placeholder="{{placeholder}}" aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{focus}}" on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"></textarea>
+      <textarea id="input" value="{{value}}" fit disabled?="{{disabled}}" placeholder="{{placeholder}}" aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{focus}}" on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"></textarea>
     </template>
     <template if="{{!multiline}}">
       <input id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}" aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{focus}}" on-blur="{{blur}}" on-keyup="keyup">
