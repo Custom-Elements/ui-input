@@ -1,32 +1,27 @@
 @import "../node_modules/ui-styles/variables";
 @import "../node_modules/ui-fonts/build/font-awesome";
-
 :host {
   display: inline-block;
   width: 100%;
   background-color: transparent;
+  border: 1px solid @color-border;
+  font-size: 1em;
+  color: fade(@color-text, @nearlyOpaque);
+  .transition(@transition);
   #icon {
     padding-right: 0.25em;
   }
   #field {
-    &.disabled {
-      .disabled;
-    }
     display: flex;
     margin: 0;
     padding: 0.65em 0.65em;
-    font-size: 1em;
-    border: 1px solid @color-border;
-    color: @color-disabled-text;
-    background-color: transparent;
-    .transition(background-color @transition,
-    opacity @transition,
-    box-shadow @transition,
-    border-color @transition;);
     &.focused {
       color: @color-text;
       border-color: @color-focus-border;
       .box-shadow(0.3em 0em 0em 0em @color-focus-border inset);
+    }
+    &.disabled {
+      color: fade(@color-text, @disabled);
     }
     input, textarea {
       flex: 1;
@@ -37,8 +32,8 @@
       border: none;
       margin: 0;
       padding: 0;
-      color: @color-disabled-text;
-      .transition(color @transition);
+      color: fade(@color-text, @nearlyOpaque);
+      .transition(@transition);
       &:focus {
         color: @color-text;
       }
@@ -47,16 +42,19 @@
 }
 
 :host(.inverted) {
+  color: fade(@color-inverted-text, @nearlyOpaque);
+  border-color: @color-inverted-border;
   #field {
-    color: @color-inverted-disabled-text;
-    border-color: @color-inverted-border;
     &.focused {
       color: @color-inverted-text;
       border-color: @color-inverted-focus-border;
       .box-shadow(0.3em 0em 0em 0em @color-inverted-focus-border inset);
     }
+    &.disabled {
+      color: fade(@color-inverted-text, @disabled);
+    }
     input, textarea {
-      color: @color-inverted-disabled-text;
+      color: fade(@color-inverted-text, @nearlyOpaque);
       &:focus {
         color: @color-inverted-text;
       }

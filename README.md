@@ -46,6 +46,8 @@ Text to prompt the user before they start to input.
 When true, the field won't take a focus.
 ###icon
 A [FontAwesome](http://fontawesome.io/) icon, just put it in like `fa-eye`.
+###type
+An HTML5 input type, defaults to `text`.
 
 ##Methods
 ###resize
@@ -57,10 +59,10 @@ Resize to the content, eliminating pesky scrolling. This only works when
 
 
 
-
 ##Event Handlers
 
 ##Polymer Lifecycle
+
 
 
 
