@@ -13,6 +13,7 @@
   }
   #field {
     display: flex;
+    align-items: center;
     margin: 0;
     padding: 0.65em 0.65em;
     &.focused {
@@ -61,3 +62,12 @@
     }
   }
 }
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"] {
+  font-family: inherit;
+}
+
