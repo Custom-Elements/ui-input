@@ -19,9 +19,12 @@ will normalized that behavior and merrily bubble them.
         @$.field.classList.remove 'focused'
         @bubble evt
 
-      focus: (evt) ->
+      inputFocus: (evt) ->
         @$.field.classList.add 'focused'
         @bubble evt
+
+      focus: ->
+        @$.input.focus()
 
       change: (evt) ->
         @resize() if @multiline?
