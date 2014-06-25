@@ -1,4 +1,4 @@
-<polymer-element name="ui-input" attributes="value multiline icon iconAnimation placeholder disabled type">
+<polymer-element name="ui-input" attributes="value multiline icon iconAnimation placeholder disabled type autofocus">
 <template>
   <link rel="stylesheet" type="text/css" href="./ui-input.less">
   <section id="field" on-keydown="{{keydown}}" class="{{ {disabled: disabled} | tokenList }}">
@@ -6,10 +6,16 @@
       <i id="icon" class="fa {{icon}} {{iconAnimation}}"></i>
     </template>
     <template if="{{multiline}}">
-      <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}" aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"></textarea>
+      <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+        aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"
+        on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"
+        autofocus?="{{autofocus}}"></textarea>
     </template>
     <template if="{{!multiline}}">
-      <input type="{{type}}" id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}" aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup"></input>
+      <input type="{{type}}" id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+        aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}"
+        on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup"
+        autofocus?="{{autofocus}}"></input>
     </template>
   </section>
   <content></content>

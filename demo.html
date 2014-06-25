@@ -24,11 +24,9 @@
   </head>
   <body unresolved>
     <div id="holder">
-
-      <a href="javascript:document.querySelector('ui-input').focus()">Set Focus</a>
-
-
-      <ui-input onkeyup="console.log(this.value);">
+      <ui-input autofocus="true"></ui-input>
+      <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
+      <ui-input onkeyup="console.log(this.value);" id="one">
       </ui-input>
       <ui-input placeholder="Hi Mom" icon="fa-female">
       </ui-input>
