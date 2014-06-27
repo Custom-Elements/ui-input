@@ -1,4 +1,5 @@
-<polymer-element name="ui-input" attributes="value multiline icon iconAnimation placeholder disabled type autofocus">
+<polymer-element name="ui-input" attributes="value multiline icon iconAnimation placeholder disabled type autofocus
+ autocorrect autocapitalize autocomplete">
 <template>
   <link rel="stylesheet" type="text/css" href="./ui-input.less">
   <section id="field" on-keydown="{{keydown}}" class="{{ {disabled: disabled} | tokenList }}">
@@ -9,10 +10,12 @@
       <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
         aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"
         on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"
+        autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
         autofocus?="{{autofocus}}"></textarea>
     </template>
     <template if="{{!multiline}}">
       <input type="{{type}}" id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+        autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
         aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}"
         on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup"
         autofocus?="{{autofocus}}"></input>

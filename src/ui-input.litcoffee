@@ -65,6 +65,15 @@ A [FontAwesome](http://fortawesome.github.io/Font-Awesome/examples/#spinning) ic
 ###type
 An HTML5 input type, defaults to `text`.
 
+### autocapitalize
+none (default) or sentences, words, characters to control capitalizations on mobile
+
+### autocorrect
+off (default) or off to disable corrections
+
+### autocomplete
+off (default) or off to disable completion
+
 ##Methods
 ###resize
 Resize to the content, eliminating pesky scrolling. This only works when
@@ -82,6 +91,9 @@ Resize to the content, eliminating pesky scrolling. This only works when
 
       created: ->
         @type = 'text'
+        @autocomplete = "off"
+        @autocorrect = "off"
+        @autocapitalize = "none"
 
       ready: ->
 
