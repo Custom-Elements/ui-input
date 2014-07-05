@@ -4,7 +4,6 @@
   display: inline-block;
   width: 100%;
   background-color: transparent;
-  border: 1px solid @color-border;
   font-size: 1em;
   color: fade(@color-text, @nearlyOpaque);
   .transition(@transition);
@@ -18,10 +17,11 @@
     align-items: center;
     margin: 0;
     padding: 0.65em 0.65em;
+    .border;
+    .transition(@transition);
     &.focused {
       color: @color-text;
-      border-color: @color-focus-border;
-      .box-shadow(0.3em 0em 0em 0em @color-focus-border inset);
+      .input-focused-border;
     }
     &.disabled {
       color: fade(@color-text, @disabled);
