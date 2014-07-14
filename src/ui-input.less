@@ -1,32 +1,39 @@
 @import "../node_modules/ui-styles/variables";
-@import "../node_modules/ui-fonts/font-awesome-styles";
+@import "../node_modules/ui-styles/visual-elements";
+
 :host {
+  box-sizing: border-box;
   display: inline-block;
+  position: relative;
   width: 100%;
   background-color: transparent;
   font-size: 1em;
   color: fade(@color-text, @nearlyOpaque);
   .transition(@transition);
-  box-sizing: border-box;
+  #disabler {
+    .disabler-enabled;
+  }
   #icon {
+    display: inline-block;
     margin-right: 0.25em;
-    line-height: inherit;
   }
   #field {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0.65em 0.65em;
-    .border;
     .transition(@transition);
+    .bottom-border;
     &.focused {
       color: @color-text;
-      .input-focused-border;
+      .bottom-focused-border;
     }
     &.disabled {
       color: fade(@color-text, @disabled);
     }
     input, textarea {
+      box-sizing: border-box;
       flex: 1;
       height: 100%;
       background-color: transparent;
@@ -44,14 +51,13 @@
   }
 }
 
-:host(.inverted) {
+:host([inverted]) {
   color: fade(@color-inverted-text, @nearlyOpaque);
-  border-color: @color-inverted-border;
   #field {
+    .bottom-inverted-border;
     &.focused {
       color: @color-inverted-text;
-      border-color: @color-inverted-focus-border;
-      .box-shadow(0.3em 0em 0em 0em @color-inverted-focus-border inset);
+      .bottom-inverted-focused-border;
     }
     &.disabled {
       color: fade(@color-inverted-text, @disabled);
@@ -62,6 +68,14 @@
         color: @color-inverted-text;
       }
     }
+  }
+}
+
+:host([disabled]) {
+  #disabler {
+    .disabler-disabled;
+  }
+  #field {
   }
 }
 

@@ -1,11 +1,12 @@
-<polymer-element name="ui-input" attributes="value multiline icon iconAnimation placeholder disabled type autofocus
+<polymer-element name="ui-input" attributes="value multiline placeholder disabled type autofocus
  autocorrect autocapitalize autocomplete">
 <template>
   <link rel="stylesheet" type="text/css" href="./ui-input.less">
+  <section id="disabler"></section>
   <section id="field" on-keydown="{{keydown}}" class="{{ {disabled: disabled} | tokenList }}">
-    <template if="{{icon}}">
-      <i id="icon" class="fa {{icon}} {{iconAnimation}}"></i>
-    </template>
+    <section id="icon">
+      <content select="icon"></content>
+    </section>
     <template if="{{multiline}}">
       <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
         aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"
@@ -21,7 +22,6 @@
         autofocus?="{{autofocus}}"></input>
     </template>
   </section>
-  <content></content>
 </template>
 <script src="./ui-input.litcoffee"></script>
 </polymer-element>

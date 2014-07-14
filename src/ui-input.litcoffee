@@ -2,9 +2,7 @@
 This is a text input element, with a couple additional bits of awesome:
 
 * `multiline` support, no need to worry about `<input>` vs `<textarea>`
-* FontAwesome prefix icons
 * `esc` clears the input.
-
 
     Polymer 'ui-input',
 
@@ -57,11 +55,14 @@ keypress.
 ###placeholder
 Text to prompt the user before they start to input.
 ###disabled
-When true, the field won't take a focus.
-###icon
-A [FontAwesome](http://fontawesome.io/) icon, just put it in like `fa-eye`.
-###iconAnimation
-A [FontAwesome](http://fortawesome.github.io/Font-Awesome/examples/#spinning) icon animation, e.g. `fa-spin`.
+When flagged, the field won't take a focus.
+
+      disabledChanged: ->
+        if @hasAttribute 'disabled'
+          @$.input.setAttribute 'disabled', ''
+        else
+          @$.input.removeAttribute 'disbabled'
+
 ###type
 An HTML5 input type, defaults to `text`.
 
