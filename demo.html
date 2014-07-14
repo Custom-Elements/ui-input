@@ -5,6 +5,10 @@
     <title>ui-input</title>
     <script src="node_modules/polymer/platform.js"></script>
     <link rel="import" href="node_modules/polymer/polymer.html">
+
+    <link rel="stylesheet" href="node_modules/ui-fonts/node_modules/ui-font-awesome/icons.less">
+    <link rel="stylesheet" href="node_modules/ui-fonts/node_modules/ui-font-awesome/font-awesome.less">
+
     <link rel="import" href="src/ui-input.html">
     <style>
       body {
@@ -23,23 +27,32 @@
   </head>
   <body unresolved>
     <div id="holder">
+    
       <ui-input autofocus="true"></ui-input>
       <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
       <ui-input onkeyup="console.log(this.value);" id="one">
+        <icon android />
       </ui-input>
-      <ui-input placeholder="Hi Mom" icon="fa-female">
+      <ui-input placeholder="Hi Mom">
+        <icon female />
       </ui-input>
-      <ui-input placeholder="When?" icon="fa-calendar" type="date">
+      <ui-input placeholder="When?" type="date">
+        <icon calendar />
       </ui-input>
-      <ui-input placeholder="Secret Code?" icon="fa-eye" type="password">
+      <ui-input placeholder="Secret Code?" type="password">
+        <icon eye />
       </ui-input>
-      <ui-input placeholder="Bin" icon="fa-tag" type="number">
+      <ui-input placeholder="Bin" type="number">
+        <icon tag />
       </ui-input>
-      <ui-input placeholder="Contact" icon="fa-phone" type="tel">
+      <ui-input placeholder="Contact" type="tel">
+        <icon phone />
       </ui-input>
-      <ui-input placeholder="Not Editable" icon="fa-warning" disabled="true">
+      <ui-input placeholder="Not Editable" disabled="true">
+        <icon warning />
       </ui-input>
-      <ui-input placeholder="Loading..." icon="fa-cog" iconAnimation="fa-spin" disabled="true">
+      <ui-input placeholder="Loading..." disabled="true">
+        <icon cog spin />
       </ui-input>
       <ui-input multiline="10">
       </ui-input>
@@ -47,9 +60,11 @@
     <div id="darkholder">
       <ui-input class="inverted" onkeyup="console.log(this.value);" value="Look in the dark">
       </ui-input>
-      <ui-input class="inverted" placeholder="Hi Mom" icon="fa-female">
+      <ui-input class="inverted" placeholder="Hi Mom">
+        <icon female />
       </ui-input>
-      <ui-input class="inverted" placeholder="Not Editable" icon="fa-warning" disabled="true">
+      <ui-input class="inverted" placeholder="Not Editable" disabled="true">
+        <icon warning />
       </ui-input>
       <ui-input class="inverted" multiline="10">
       </ui-input>

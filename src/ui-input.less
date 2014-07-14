@@ -1,5 +1,4 @@
 @import "../node_modules/ui-styles/variables";
-@import "../node_modules/ui-fonts/node_modules/ui-font-awesome/icons";
 :host {
   display: inline-block;
   width: 100%;
@@ -8,7 +7,7 @@
   color: fade(@color-text, @nearlyOpaque);
   .transition(@transition);
   box-sizing: border-box;
-  #icon {
+  ::content[select=icon] icon {
     margin-right: 0.25em;
     line-height: inherit;
   }
