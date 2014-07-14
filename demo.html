@@ -30,10 +30,10 @@
     
       <ui-input autofocus="true"></ui-input>
       <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
-      <ui-input onkeyup="console.log(this.value);" id="one">
-        <icon android />
+      <ui-input id="one" placeholder="Type some text and press enter">
+        <icon android></icon>
       </ui-input>
-      <ui-input placeholder="Hi Mom">
+      <ui-input onkeydown="console.log(this.value);" placeholder="Hi Mom">
         <icon female />
       </ui-input>
       <ui-input placeholder="When?" type="date">
@@ -76,6 +76,20 @@
 
     <script>
       document.addEventListener('polymer-ready', function() {
+
+        // just a demo not the prefered way to add elements (see databinding & templates)
+        // subelement functionality likely used by a composite control with the ui-input being a child element
+        var addItem = function(e){
+          if(e.keyCode == 13 && e.target.value){
+            var span = document.createElement('span');
+            span.innerHTML = e.target.value;
+            e.target.appendChild(span);
+            e.target.value = "";
+            Platform.flush();
+          }
+        };
+        document.querySelector("#one").addEventListener("keydown", addItem);
+
         //poke your element here
       })
     </script>

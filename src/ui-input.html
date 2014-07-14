@@ -6,7 +6,10 @@
     
     <content select="icon">
     </content>
-
+  
+    <content select="span,div,section">
+    </content>
+    
     <template if="{{multiline}}">
       <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
         aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"

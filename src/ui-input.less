@@ -7,13 +7,24 @@
   color: fade(@color-text, @nearlyOpaque);
   .transition(@transition);
   box-sizing: border-box;
-  ::content[select=icon] icon {
-    margin-right: 0.25em;
-    line-height: inherit;
+  ::content {
+    & > span,div,section {
+      display:inline-flex;
+      margin-right: 0.25em;
+      overflow: hidden;
+    }
+    icon {
+      display: inline-flex;
+      max-width: 100%;
+      margin-right: 0.25em;
+      line-height: inherit;
+    }
   }
   #field {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    
     margin: 0;
     padding: 0.65em 0.65em;
     .border;
@@ -26,13 +37,14 @@
       color: fade(@color-text, @disabled);
     }
     input, textarea {
-      flex: 1;
+      flex:10;
+      display: inline-flex;
+      margin: 0;
       height: 100%;
       background-color: transparent;
       font-size: 1em;
       outline: none;
       border: none;
-      margin: 0;
       padding: 0;
       color: fade(@color-text, @nearlyOpaque);
       .transition(@transition);
