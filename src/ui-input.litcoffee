@@ -58,10 +58,6 @@ keypress.
 Text to prompt the user before they start to input.
 ###disabled
 When true, the field won't take a focus.
-###icon
-A [FontAwesome](http://fontawesome.io/) icon, just put it in like `fa-eye`.
-###iconAnimation
-A [FontAwesome](http://fortawesome.github.io/Font-Awesome/examples/#spinning) icon animation, e.g. `fa-spin`.
 ###type
 An HTML5 input type, defaults to `text`.
 
