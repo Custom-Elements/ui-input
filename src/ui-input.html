@@ -4,9 +4,11 @@
   <link rel="stylesheet" type="text/css" href="./ui-input.less">
   <section id="disabler"></section>
   <section id="field" on-keydown="{{keydown}}" class="{{ {disabled: disabled} | tokenList }}">
-    <section id="icon">
-      <content select="icon"></content>
-    </section>
+
+    <content select="icon"></content>
+
+    <content select="item"></content>
+
     <template if="{{multiline}}">
       <textarea id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
         aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"

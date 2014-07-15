@@ -12,14 +12,24 @@
   #disabler {
     .disabler-enabled;
   }
-  #icon {
-    display: inline-block;
-    margin-right: 0.25em;
+  ::content {
+    icon {
+      margin-right: 0.25em;
+      line-height: inherit;
+    }
+    item {
+      margin-right: 0.25em;
+      padding: 0em .25em;
+      overflow: hidden;      
+    }
   }
+
   #field {
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+
     margin: 0;
     padding: 0.65em 0.65em;
     .transition(@transition);
