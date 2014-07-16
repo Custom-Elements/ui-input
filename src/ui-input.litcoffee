@@ -52,6 +52,10 @@ Set this to true to create a multiline, self resizing input.
 ###value
 This will contain the user's typed text, and will be updated live with each
 keypress.
+
+      valueChanged: ->
+        console.log @value
+
 ###placeholder
 Text to prompt the user before they start to input.
 ###disabled

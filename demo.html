@@ -20,6 +20,9 @@
       <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
       <ui-input id="one">
         <icon android></icon>
+        <template id="bindme" repeat="{{items}}">
+          <item>{{text}}</item>
+        </template>
       </ui-input>
       <ui-input placeholder="Hi Mom">
         <icon female></icon>
@@ -58,22 +61,22 @@
     </form>
 
     <script>
+      //data bind to the items template for our android input
+      var items = [];
       document.addEventListener('polymer-ready', function() {
-        
-        // just a demo not the prefered way to add elements (see data binding & templates)
-        var addItem = function(e){
-          if(e.keyCode == 13 && e.target.value){
-            var item = document.createElement('item');
-            item.innerHTML = e.target.value;
-            e.target.appendChild(item);
-            e.target.value = "";
-            Platform.flush();
-          }
-        };
-        document.querySelector("#one").addEventListener("keydown", addItem);        
-
-
+        document.querySelector('#bindme').model = {items: items};
       })
+      //turn the text in our input into a display item, clear it out of the input
+      document.querySelector("#one").addEventListener("keydown", function(e) {
+        console.log(e.target)
+        if(e.keyCode == 13 && e.target.value){
+          items.push({text: e.target.value});
+          e.target.value = "";
+          //eat this key so the input doesn't see it
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      });
     </script>
   </body>
 </html>
