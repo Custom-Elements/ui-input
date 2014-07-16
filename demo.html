@@ -18,7 +18,8 @@
     <form container>
       <ui-input autofocus="true"></ui-input>
       <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
-      <ui-input onkeyup="console.log(this.value);" id="one">
+      <ui-input id="one">
+        <icon android></icon>
       </ui-input>
       <ui-input placeholder="Hi Mom">
         <icon female></icon>
@@ -58,7 +59,20 @@
 
     <script>
       document.addEventListener('polymer-ready', function() {
-        //poke your element here
+        
+        // just a demo not the prefered way to add elements (see data binding & templates)
+        var addItem = function(e){
+          if(e.keyCode == 13 && e.target.value){
+            var item = document.createElement('item');
+            item.innerHTML = e.target.value;
+            e.target.appendChild(item);
+            e.target.value = "";
+            Platform.flush();
+          }
+        };
+        document.querySelector("#one").addEventListener("keydown", addItem);        
+
+
       })
     </script>
   </body>
