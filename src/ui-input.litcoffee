@@ -7,6 +7,54 @@ This is a text input element, with a couple additional bits of awesome:
     Polymer 'ui-input',
 
 ##Events
+###change
+Fired when the `value` changes.
+
+##Attributes and Change Handlers
+###multiline
+Set this to true to create a multiline, self resizing input.
+###value
+This will contain the user's typed text, and will be updated live with each
+keypress.
+
+      valueChanged: ->
+        @fire 'change', @value
+
+###placeholder
+Text to prompt the user before they start to input.
+###disabled
+When flagged, the field won't take a focus.
+
+      disabledChanged: ->
+        if @hasAttribute 'disabled'
+          @$.input.setAttribute 'disabled', ''
+        else
+          @$.input.removeAttribute 'disbabled'
+
+###type
+An HTML5 input type, defaults to `text`.
+
+### autocapitalize
+none (default) or sentences, words, characters to control capitalizations on mobile
+
+### autocorrect
+off (default) or off to disable corrections
+
+### autocomplete
+off (default) or off to disable completion
+
+##Methods
+###resize
+Resize to the content, eliminating pesky scrolling. This only works when
+`multiline="true"`.
+
+      resize: ->
+        textarea = @shadowRoot.querySelector 'textarea'
+        setTimeout ->
+          textarea.style.height = 'auto'
+          textarea.style.height = "#{textarea.scrollHeight}px"
+
+##Event Handlers
 Blur, focus, and change apparently don't bubble by default. So, this input
 will normalized that behavior and merrily bubble them.
 
@@ -46,52 +94,6 @@ will normalized that behavior and merrily bubble them.
       drop: (evt) ->
         @resize() if @multiline?
 
-##Attributes and Change Handlers
-###multiline
-Set this to true to create a multiline, self resizing input.
-###value
-This will contain the user's typed text, and will be updated live with each
-keypress.
-
-      valueChanged: ->
-        console.log @value
-
-###placeholder
-Text to prompt the user before they start to input.
-###disabled
-When flagged, the field won't take a focus.
-
-      disabledChanged: ->
-        if @hasAttribute 'disabled'
-          @$.input.setAttribute 'disabled', ''
-        else
-          @$.input.removeAttribute 'disbabled'
-
-###type
-An HTML5 input type, defaults to `text`.
-
-### autocapitalize
-none (default) or sentences, words, characters to control capitalizations on mobile
-
-### autocorrect
-off (default) or off to disable corrections
-
-### autocomplete
-off (default) or off to disable completion
-
-##Methods
-###resize
-Resize to the content, eliminating pesky scrolling. This only works when
-`multiline="true"`.
-
-      resize: ->
-        textarea = @shadowRoot.querySelector 'textarea'
-        setTimeout ->
-          textarea.style.height = 'auto'
-          textarea.style.height = "#{textarea.scrollHeight}px"
-
-##Event Handlers
-
 ##Polymer Lifecycle
 
       created: ->
@@ -100,10 +102,6 @@ Resize to the content, eliminating pesky scrolling. This only works when
         @autocorrect = "off"
         @autocapitalize = "none"
 
-      publish:
-        value:
-          reflect: true
-
       ready: ->
 
       attached: ->
@@ -111,3 +109,7 @@ Resize to the content, eliminating pesky scrolling. This only works when
       domReady: ->
 
       detached: ->
+
+      publish:
+        value:
+          reflect: true
