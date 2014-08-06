@@ -100,6 +100,10 @@ Resize to the content, eliminating pesky scrolling. This only works when
         @autocorrect = "off"
         @autocapitalize = "none"
 
+      publish:
+        value:
+          reflect: true
+
       ready: ->
 
       attached: ->
