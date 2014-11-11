@@ -52,7 +52,7 @@ Resize to the content, eliminating pesky scrolling. This only works when
         textarea = @shadowRoot.querySelector 'textarea'
         setTimeout ->
           textarea.style.height = 'auto'
-          textarea.style.height = "#{textarea.scrollHeight}px"
+          textarea.style.height = "#{textarea.scrollHeight+2}px"
 
 ##Event Handlers
 Blur, focus, and change apparently don't bubble by default. So, this input
