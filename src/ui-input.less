@@ -3,12 +3,11 @@
 :host {
   box-sizing: border-box;
   display: inline-flex;
-    justify-content:flex-start;
+  justify-content:flex-start;
   position: relative;
   width: 100%;
   background-color: transparent;
   font-size: 1em;
-  margin-bottom: 1em;
   color: @color-text;
   .transition(@transition);
   ::content {
@@ -22,6 +21,9 @@
       margin-right: 0.25em;
       padding: 0em .25em;
       overflow: hidden;
+      icon {
+        margin-right: 0;
+      }
     }
   }
 
@@ -34,7 +36,6 @@
     justify-content:flex-start;
 
     margin: 0;
-    padding: 0.15em 0.15em;
     .transition(@transition);
     &.focused {
       input, textarea {
@@ -75,6 +76,14 @@
   input, textarea {
     color: @color-disabled-text;
   }
+  }
+}
+
+:host([borderless]) {
+  #field {
+    #input {
+      border: 0;  
+    }
   }
 }
 
