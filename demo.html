@@ -11,14 +11,16 @@
     <style>
       body {
         font-family: "Helvetica Neue", "Helvetica", Arial;
+        font-size: 14px;
+      }
+      form {
+        padding: 1em;
       }
     </style>
   </head>
   <body unresolved>
     <form container>
-      <ui-input autofocus="true"></ui-input>
-      <a href="javascript:document.querySelector('#one').focus()">Set Focus To Next One</a>
-      <ui-input id="one">
+      <ui-input autofocus="true" id="one">
         <icon android></icon>
         <template id="bindme" repeat="{{items}}">
           <value>{{text}}</value>
@@ -45,19 +47,6 @@
       <ui-input multiline="10">
         <icon tasks></icon>
       </ui-input>
-      <ui-input autocorrect="off" autocapitalize="none" placeholder="no auto corrrect, or capitalize"></ui-input>
-      <background inverted id="darkholder">
-        <ui-input inverted onkeyup="console.log(this.value);" value="Look in the dark">
-        </ui-input>
-        <ui-input inverted placeholder="Hi Mom">
-          <icon female></icon>
-        </ui-input>
-        <ui-input inverted disabled placeholder="Not Editable">
-          <icon warning></icon>
-        </ui-input>
-        <ui-input inverted multiline="10">
-        </ui-input>
-      </background>
     </form>
 
     <script>

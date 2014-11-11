@@ -2,20 +2,19 @@
 @import "../node_modules/ui-styles/visual-elements";
 :host {
   box-sizing: border-box;
-  display: inline-block;
+  display: inline-flex;
+    justify-content:flex-start;
   position: relative;
   width: 100%;
   background-color: transparent;
   font-size: 1em;
-  color: fade(@color-text, @nearlyOpaque);
+  margin-bottom: 1em;
+  color: @color-text;
   .transition(@transition);
-  #disabler {
-    .disabler-enabled;
-  }
   ::content {
     icon {
       display: inline-block;
-      margin-right: 0.25em;
+      margin-right: 1em;
       line-height: inherit;
     }
     value {
@@ -26,69 +25,56 @@
     }
   }
 
+
   #field {
     box-sizing: border-box;
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content:flex-start;
-    align-items: center;
 
     margin: 0;
     padding: 0.15em 0.15em;
     .transition(@transition);
-    .bottom-border;
     &.focused {
-      color: @color-text;
-      .bottom-focused-border;
-    }
-    &.disabled {
-      color: fade(@color-text, @disabled);
-    }
-    input, textarea {
-      min-width: 25%;
-      box-sizing: border-box;
-      flex: 1;
-      height: 100%;
-      background-color: transparent;
-      font-size: 1em;
-      outline: none;
-      border: none;
-      margin: 0;
-      padding: 0;
-      color: fade(@color-text, @nearlyOpaque);
-      .transition(@transition);
-      &:focus {
-        color: @color-text;
+      input, textarea {
+        .bottom-focused-border;
       }
     }
-  }
-}
-
-:host([inverted]) {
-  color: fade(@color-inverted-text, @nearlyOpaque);
-  #field {
-    .bottom-inverted-border;
-    &.focused {
-      color: @color-inverted-text;
-      .bottom-inverted-focused-border;
-    }
-    &.disabled {
-      color: fade(@color-inverted-text, @disabled);
-    }
-    input, textarea {
-      color: fade(@color-inverted-text, @nearlyOpaque);
-      &:focus {
-        color: @color-inverted-text;
+    #input {
+      .bottom-border;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 0.5em;
+      box-sizing: border-box;
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:flex-start;
+      align-items: center;
+      input, textarea {
+        color: @color-text;
+        min-width: 25%;
+        box-sizing: border-box;
+        flex: 1;
+        height: 100%;
+        background-color: transparent;
+        font-size: 1em;
+        outline: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        .transition(@transition);
       }
     }
   }
 }
 
 :host([disabled]) {
-  #disabler {
-    .disabler-disabled;
-  }
   #field {
+  input, textarea {
+    color: @color-disabled-text;
+  }
   }
 }
 
