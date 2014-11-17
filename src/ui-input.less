@@ -4,10 +4,8 @@
   box-sizing: border-box;
   display: inline-flex;
   justify-content:flex-start;
-  position: relative;
   width: 100%;
   background-color: transparent;
-  font-size: 1em;
   color: @color-text;
   .transition(@transition);
   ::content {
@@ -18,9 +16,9 @@
     }
     value {
       display: inline-block;
-      margin-right: 0.25em;
-      padding: 0em .25em;
-      overflow: hidden;
+      margin: 0;
+      padding: 0 @pad 0 0;
+      .bottom-border;
       icon {
         margin-right: 0;
       }
@@ -60,12 +58,20 @@
         flex: 1;
         height: 100%;
         background-color: transparent;
-        font-size: 1em;
+        line-height: @line-height;
         outline: none;
         border: none;
         margin: 0;
         padding: 0;
         .transition(@transition);
+      }
+      input[type="date"]::-webkit-inner-spin-button,
+      input[type="datetime"]::-webkit-inner-spin-button,
+      input[type="datetime-local"]::-webkit-inner-spin-button,
+      input[type="month"]::-webkit-inner-spin-button,
+      input[type="time"]::-webkit-inner-spin-button,
+      input[type="week"]::-webkit-inner-spin-button {
+        display: none;
       }
     }
   }
@@ -73,16 +79,16 @@
 
 :host([disabled]) {
   #field {
-  input, textarea {
-    color: @color-disabled-text;
-  }
+    input, textarea {
+      color: @color-disabled-text;
+    }
   }
 }
 
 :host([borderless]) {
   #field {
     #input {
-      border: 0;  
+      border: 0;
     }
   }
 }
