@@ -23,6 +23,12 @@
         margin-right: 0;
       }
     }
+    preview {
+      display: inline-block;
+      margin: 0;
+      padding-bottom: @pad;
+      .bottom-border;
+    }
   }
 
 
@@ -35,20 +41,16 @@
 
     margin: 0;
     .transition(@transition);
-    &.focused {
-      input, textarea {
-        .bottom-focused-border;
-      }
-    }
-    #input {
+
+    #html-input {
       .bottom-border;
       margin: 0;
       padding: 0;
-      padding-bottom: 0.5em;
+      padding-bottom: @pad;
       box-sizing: border-box;
       flex: 1;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: no-wrap;
       justify-content:flex-start;
       align-items: center;
       input, textarea {
@@ -77,17 +79,35 @@
   }
 }
 
+:host([focused]) {
+  ::content {
+    value {
+      .bottom-focused-border;
+    }
+    preview {
+      .bottom-focused-border;
+    }
+  }
+  #field {
+    #html-input {
+      .bottom-focused-border;
+    }
+  }
+}
+
 :host([disabled]) {
   #field {
-    input, textarea {
-      color: @color-disabled-text;
+    #html-input {
+      input, textarea {
+        color: @color-disabled-text;
+      }
     }
   }
 }
 
 :host([borderless]) {
   #field {
-    #input {
+    #html-input {
       border: 0;
     }
   }

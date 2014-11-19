@@ -4,6 +4,8 @@ This is a text input element, with a couple additional bits of awesome:
 * `multiline` support, no need to worry about `<input>` vs `<textarea>`
 * `esc` clears the input.
 
+    moment = require 'moment'
+
     Polymer 'ui-input',
 
 ##Events
@@ -16,8 +18,14 @@ Set this to true to create a multiline, self resizing input.
 ###value
 This will contain the user's typed text, and will be updated live with each
 keypress.
+Some values will need to be parsed and typed.
 
-      valueChanged: ->
+      valueChanged: (oldValue, newValue)->
+        console.log oldValue, newValue
+        if not oldValue or oldValue?.getTime?() isnt newValue?.getTime?()
+          if @type is 'date'
+            @value = moment(@value).utc().toDate()
+        console.log @value
         @fire 'change', @value
 
 ###placeholder
@@ -44,6 +52,15 @@ off (default) or off to disable corrections
 off (default) or off to disable completion
 
 ##Methods
+###scrubValue
+Make `value` conform to the expectations of HTML input controls.
+
+      scrubValue: (value) ->
+        if @type is 'date'
+          moment(value).utc().format("YYYY-MM-DD")
+        else
+          value
+
 ###resize
 Resize to the content, eliminating pesky scrolling. This only works when
 `multiline="true"`.
@@ -61,13 +78,58 @@ will normalized that behavior and merrily bubble them.
       bubble: (evt) ->
         @fire evt.type, null, this, false
 
+When leaving, show the preview if present, this works together with inputFocus
+so... keep them close together in the file.
+
       blur: (evt) ->
-        @$.field.classList.remove 'focused'
-        @bubble evt
+        preview = @querySelector('preview')
+        if preview
+          anim = @$.input.animate [
+            {opacity: 1, transform: 'translateX(0)', offset: 0}
+            {opacity: 0, transform: 'translateX(2%)', offset: 1}
+          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
+          anim.onfinish = =>
+            @$.input.setAttribute 'invisible', ''
+            preview.removeAttribute 'hidden'
+            @removeAttribute 'focused'
+            anim = preview.animate [
+              {opacity: 0, transform: 'translateX(2%)', offset: 0}
+              {opacity: 1, transform: 'translateX(0)', offset: 1}
+            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
+            anim.onfinish = =>
+              @bubble evt
+        else
+          @removeAttribute 'focused'
+          @bubble evt
+
+This gets a bit complicated to have an animation showing the
+actual input control, hiding a preview -- but only if there is a preview.
+
+OK -- so this is a bit tricky, in that the INPUT is never actuall hidden,
+or it ceases to be a tab stop. So we just make it invisible and count on flexbox
+to crush it
 
       inputFocus: (evt) ->
-        @$.field.classList.add 'focused'
-        @bubble evt
+        preview = @querySelector('preview')
+        if preview and not @hasAttribute 'focused'
+          anim = preview.animate [
+            {opacity: 1, transform: 'translateX(0)', offset: 0}
+            {opacity: 0, transform: 'translateX(2%)', offset: 1}
+          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
+          anim.onfinish = =>
+            preview.setAttribute 'hidden', ''
+            @$.input.removeAttribute 'invisible'
+            @setAttribute 'focused', ''
+            anim = @$.input.animate [
+              {opacity: 0, transform: 'translateX(2%)', offset: 0}
+              {opacity: 1, transform: 'translateX(0)', offset: 1}
+            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
+            anim.onfinish = =>
+              @$.input.focus()
+              @bubble evt
+        else
+          @setAttribute 'focused', ''
+          @bubble evt
 
       focus: ->
         @$.input.focus()
@@ -105,6 +167,7 @@ will normalized that behavior and merrily bubble them.
       ready: ->
 
       attached: ->
+        @blur()
 
       domReady: ->
 
