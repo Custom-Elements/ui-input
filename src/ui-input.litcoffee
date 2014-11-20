@@ -21,11 +21,9 @@ keypress.
 Some values will need to be parsed and typed.
 
       valueChanged: (oldValue, newValue)->
-        console.log oldValue, newValue
         if not oldValue or oldValue?.getTime?() isnt newValue?.getTime?()
           if @type is 'date'
             @value = moment(@value).utc().toDate()
-        console.log @value
         @fire 'change', @value
 
 ###placeholder
@@ -76,7 +74,8 @@ Blur, focus, and change apparently don't bubble by default. So, this input
 will normalized that behavior and merrily bubble them.
 
       bubble: (evt) ->
-        @fire evt.type, null, this, false
+        if evt
+          @fire evt.type, null, this, false
 
 When leaving, show the preview if present, this works together with inputFocus
 so... keep them close together in the file.
