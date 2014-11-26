@@ -20,7 +20,7 @@
             autofocus?="{{autofocus}}" rows="{{multiline || 1}}"></textarea>
         </template>
         <template if="{{!multiline}}">
-          <input type="{{type}}" id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+          <input type="{{type}}" id="input" value="{{value}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
             autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
             aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}"
             on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup"

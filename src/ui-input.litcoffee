@@ -135,7 +135,7 @@ to crush it
 
       change: (evt) ->
         @resize() if @multiline?
-        @value = evt.target.value
+        @value = @scrubValue(evt.target.value)
         @bubble evt
 
       keyup: (evt) ->
