@@ -4,7 +4,9 @@ This is a text input element, with a couple additional bits of awesome:
 * `multiline` support, no need to worry about `<input>` vs `<textarea>`
 * `esc` clears the input.
 
+
     moment = require 'moment'
+    require 'ui-styles/animations'
 
     Polymer 'ui-input',
 
@@ -82,20 +84,13 @@ so... keep them close together in the file.
 
       blur: (evt) ->
         preview = @querySelector('preview')
+        input = @$.input
         if preview
-          anim = @$.input.animate [
-            {opacity: 1, transform: 'translateX(0)', offset: 0}
-            {opacity: 0, transform: 'translateX(2%)', offset: 1}
-          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-          anim.onfinish = =>
+          input.fadeOut =>
             @$.input.setAttribute 'invisible', ''
             preview.removeAttribute 'hidden'
             @removeAttribute 'focused'
-            anim = preview.animate [
-              {opacity: 0, transform: 'translateX(2%)', offset: 0}
-              {opacity: 1, transform: 'translateX(0)', offset: 1}
-            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-            anim.onfinish = =>
+            preview.fadeIn =>
               @bubble evt
         else
           @removeAttribute 'focused'
@@ -110,21 +105,14 @@ to crush it
 
       inputFocus: (evt) ->
         preview = @querySelector('preview')
+        input = @$.input
         if preview and not @hasAttribute 'focused'
-          anim = preview.animate [
-            {opacity: 1, transform: 'translateX(0)', offset: 0}
-            {opacity: 0, transform: 'translateX(2%)', offset: 1}
-          ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-          anim.onfinish = =>
+          preview.fadeOut =>
             preview.setAttribute 'hidden', ''
-            @$.input.removeAttribute 'invisible'
+            input.removeAttribute 'invisible'
             @setAttribute 'focused', ''
-            anim = @$.input.animate [
-              {opacity: 0, transform: 'translateX(2%)', offset: 0}
-              {opacity: 1, transform: 'translateX(0)', offset: 1}
-            ], duration: 200, easing: "0.2s cubic-bezier(0.4, 0.0, 1, 1)"
-            anim.onfinish = =>
-              @$.input.focus()
+            input.fadeIn =>
+              input.focus()
               @bubble evt
         else
           @setAttribute 'focused', ''
