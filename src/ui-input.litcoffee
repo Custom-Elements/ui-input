@@ -113,9 +113,11 @@ to crush it
             @setAttribute 'focused', ''
             input.fadeIn =>
               input.focus()
+              @resize() if @multiline?
               @bubble evt
         else
           @setAttribute 'focused', ''
+          @resize() if @multiline?
           @bubble evt
 
       focus: ->
