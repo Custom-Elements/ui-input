@@ -88,7 +88,7 @@ so... keep them close together in the file.
       blur: (evt) ->
         preview = @querySelector('preview')
         input = @$.input
-        if preview
+        if preview and @value
           input.fadeOut =>
             @$.input.setAttribute 'invisible', ''
             preview.removeAttribute 'hidden'
