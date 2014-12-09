@@ -23,9 +23,6 @@ keypress.
 Some values will need to be parsed and typed.
 
       valueChanged: (oldValue, newValue)->
-        if not oldValue or oldValue?.getTime?() isnt newValue?.getTime?()
-          if @type is 'date'
-            @value = moment(@value).utc().toDate()
         @fire 'change', @value
 
 ###placeholder
@@ -55,11 +52,17 @@ off (default) or off to disable completion
 ###scrubValue
 Make `value` conform to the expectations of HTML input controls.
 
-      scrubValue: (value) ->
-        if @type is 'date'
-          moment(value).utc().format("YYYY-MM-DD")
-        else
-          value
+      scrubValue:
+        toDOM: (value) ->
+          if @type is 'date'
+            moment(value).utc().format("YYYY-MM-DD")
+          else
+            value
+        toModel: (value) ->
+          if @type is 'date'
+            moment(value).utc().toDate()
+          else
+            value
 
 ###resize
 Resize to the content, eliminating pesky scrolling. This only works when
@@ -125,7 +128,6 @@ to crush it
 
       change: (evt) ->
         @resize() if @multiline?
-        @value = @scrubValue(evt.target.value)
         @bubble evt
 
       keyup: (evt) ->
