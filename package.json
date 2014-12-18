@@ -2,6 +2,7 @@
   "name": "ui-input",
   "version": "0.0.0",
   "dependencies": {
+    "lodash-node": "^2.4.1",
     "moment": "^2.8.3",
     "polymer": "git://github.com/custom-elements/polymer#master",
     "polymer-build": "",

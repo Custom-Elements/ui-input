@@ -6,6 +6,7 @@ This is a text input element, with a couple additional bits of awesome:
 
 
     moment = require 'moment'
+    _ = require 'lodash-node'
     require 'ui-styles/animations'
 
     Polymer 'ui-input',
@@ -23,7 +24,7 @@ keypress.
 Some values will need to be parsed and typed.
 
       valueChanged: (oldValue, newValue)->
-        @fire 'change', @value
+        @fireChange()
 
 ###placeholder
 Text to prompt the user before they start to input.
@@ -60,7 +61,7 @@ Make `value` conform to the expectations of HTML input controls.
             value
         toModel: (value) ->
           if @type is 'date'
-            moment(value).utc().toDate()
+            moment(value).utc().format("YYYY-MM-DD")
           else
             value
 
@@ -154,6 +155,9 @@ to crush it
         @autocomplete = "off"
         @autocorrect = "off"
         @autocapitalize = "none"
+        @fireChange = _.debounce =>
+          @fire 'change', @value
+        , 300
 
       ready: ->
 
