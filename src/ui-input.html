@@ -9,18 +9,21 @@
     <section id="value-input">
       <content select="value"></content>
 
-      <content select="preview"></content>
+      <preview-and-placeholder>
+        <content select="preview"></content>
+        <placeholder>{{placeholder}}</placeholder>
+      </preview-and-placeholder>
 
       <section id="html-input">
         <template if="{{multiline}}">
-          <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+          <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
             aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"
             on-blur="{{blur}}" on-keyup="keyup" on-cut="cut" on-paste="paste" on-drop="drop"
             autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
             autofocus?="{{autofocus}}" rows="{{multiline || 1}}"></textarea>
         </template>
         <template if="{{!multiline}}">
-          <input type="{{type}}" id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}" placeholder="{{placeholder}}"
+          <input type="{{type}}" id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
             autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
             aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}"
             on-focus="{{inputFocus}}" on-blur="{{blur}}" on-keyup="keyup"

@@ -23,7 +23,14 @@ This will contain the user's typed text, and will be updated live with each
 keypress.
 Some values will need to be parsed and typed.
 
+Placeholders will be hidden if there is a value. No need for animation, as
+we will already be animated to the editor when this happens.
+
       valueChanged: (oldValue, newValue)->
+        if @value
+          @shadowRoot.querySelector('placeholder').setAttribute 'hidden', ''
+        else
+          @shadowRoot.querySelector('placeholder').removeAttribute 'hidden'
         @fireChange()
 
 ###placeholder
@@ -55,12 +62,12 @@ Make `value` conform to the expectations of HTML input controls.
 
       scrubValue:
         toDOM: (value) ->
-          if @type is 'date'
+          if @type is 'date' and value
             moment(value).utc().format("YYYY-MM-DD")
           else
             value
         toModel: (value) ->
-          if @type is 'date'
+          if @type is 'date' and value
             moment(value).utc().format("YYYY-MM-DD")
           else
             value
@@ -84,21 +91,21 @@ will normalized that behavior and merrily bubble them.
           @fire evt.type, null, this, false
 
 When leaving, show the preview if present, this works together with inputFocus
-so... keep them close together in the file.
+so... keep them close together in the file. The input will stay visible if
+there is content and no other preview specified. But if there is no value
+then we'll show the placeholder.
 
       blur: (evt) ->
-        preview = @querySelector('preview')
+        previewAndPlaceholder = @shadowRoot.querySelector('preview-and-placeholder')
+        preview = @shadowRoot.querySelector('preview')
         input = @$.input
-        if preview and @value
+        if preview or not @value
           input.fadeOut =>
             @$.input.setAttribute 'invisible', ''
-            preview.removeAttribute 'hidden'
+            previewAndPlaceholder.removeAttribute 'hidden'
             @removeAttribute 'focused'
-            preview.fadeIn =>
+            previewAndPlaceholder.fadeIn =>
               @bubble evt
-        else
-          @removeAttribute 'focused'
-          @bubble evt
 
 This gets a bit complicated to have an animation showing the
 actual input control, hiding a preview -- but only if there is a preview.
@@ -108,21 +115,19 @@ or it ceases to be a tab stop. So we just make it invisible and count on flexbox
 to crush it
 
       inputFocus: (evt) ->
-        preview = @querySelector('preview')
+        if @hasAttribute 'disabled'
+          return
+        previewAndPlaceholder = @shadowRoot.querySelector('preview-and-placeholder')
         input = @$.input
-        if preview and not @hasAttribute 'focused'
-          preview.fadeOut =>
-            preview.setAttribute 'hidden', ''
+        if not @hasAttribute 'focused'
+          previewAndPlaceholder.fadeOut =>
+            previewAndPlaceholder.setAttribute 'hidden', ''
             input.removeAttribute 'invisible'
-            @setAttribute 'focused', ''
             input.fadeIn =>
-              input.focus()
               @resize() if @multiline?
+              @setAttribute 'focused', ''
               @bubble evt
-        else
-          @setAttribute 'focused', ''
-          @resize() if @multiline?
-          @bubble evt
+              input.focus()
 
       focus: ->
         @$.input.focus()
