@@ -23,14 +23,14 @@ This will contain the user's typed text, and will be updated live with each
 keypress.
 Some values will need to be parsed and typed.
 
-Placeholders will be hidden if there is a value. No need for animation, as
-we will already be animated to the editor when this happens.
-
       valueChanged: (oldValue, newValue)->
+        placeholder = @shadowRoot.querySelector('placeholder')
         if @value
-          @shadowRoot.querySelector('placeholder').setAttribute 'hidden', ''
+          placeholder.fadeOut ->
+            placeholder.setAttribute 'hidden', ''
         else
-          @shadowRoot.querySelector('placeholder').removeAttribute 'hidden'
+          placeholder.fadeIn ->
+            placeholder.removeAttribute 'hidden'
         @fireChange()
 
 ###placeholder
@@ -91,21 +91,20 @@ will normalized that behavior and merrily bubble them.
           @fire evt.type, null, this, false
 
 When leaving, show the preview if present, this works together with inputFocus
-so... keep them close together in the file. The input will stay visible if
-there is content and no other preview specified. But if there is no value
-then we'll show the placeholder.
 
       blur: (evt) ->
-        previewAndPlaceholder = @shadowRoot.querySelector('preview-and-placeholder')
-        preview = @shadowRoot.querySelector('preview')
+        preview = @querySelector('preview')
         input = @$.input
         if preview or not @value
           input.fadeOut =>
-            @$.input.setAttribute 'invisible', ''
-            previewAndPlaceholder.removeAttribute 'hidden'
             @removeAttribute 'focused'
-            previewAndPlaceholder.fadeIn =>
-              @bubble evt
+            @$.input.setAttribute 'invisible', ''
+            if preview and @value
+              preview.removeAttribute 'hidden'
+              preview.fadeIn =>
+                @bubble evt
+        else
+          @removeAttribute 'focused'
 
 This gets a bit complicated to have an animation showing the
 actual input control, hiding a preview -- but only if there is a preview.
@@ -117,17 +116,18 @@ to crush it
       inputFocus: (evt) ->
         if @hasAttribute 'disabled'
           return
-        previewAndPlaceholder = @shadowRoot.querySelector('preview-and-placeholder')
-        input = @$.input
         if not @hasAttribute 'focused'
-          previewAndPlaceholder.fadeOut =>
-            previewAndPlaceholder.setAttribute 'hidden', ''
-            input.removeAttribute 'invisible'
-            input.fadeIn =>
-              @resize() if @multiline?
-              @setAttribute 'focused', ''
-              @bubble evt
-              input.focus()
+          @setAttribute 'focused', ''
+          preview = @querySelector('preview')
+          input = @$.input
+          if preview
+            preview.fadeOut =>
+              preview.setAttribute 'hidden', ''
+          input.removeAttribute 'invisible'
+          input.fadeIn =>
+            @resize() if @multiline?
+            @bubble evt
+            input.focus()
 
       focus: ->
         @$.input.focus()
@@ -167,6 +167,9 @@ to crush it
       ready: ->
 
       attached: ->
+        preview = @querySelector('preview')
+        if preview
+          preview.setAttribute 'hidden', ''
         @blur()
 
       domReady: ->

@@ -21,12 +21,13 @@
     <form container>
       <ui-input autofocus="true" id="one">
         <icon android></icon>
-        <template id="bindme" repeat="{{items}}">
-          <value>{{text}}</value>
-        </template>
       </ui-input>
-      <ui-input placeholder="Hi Mom">
-        <preview><icon heart></icon></preview>
+      <ui-input placeholder="Hi Mom" id="mom">
+        <preview><icon heart></icon>
+          <template id="moms" repeat="{{stuff}}">
+            <value>{{text}}</value>
+          </template>
+        </preview>
         <icon female></icon>
       </ui-input>
       <ui-input placeholder="When?" type="date">
@@ -53,19 +54,11 @@
       //data bind to the items template for our android input
       var items = [];
       document.addEventListener('polymer-ready', function() {
-        document.querySelector('#bindme').model = {items: items};
+        //turn the text in our input into a display item, clear it out of the input
+        document.querySelector("#mom").addEventListener("change", function(e) {
+          document.querySelector('#moms').model = {stuff: [{text: e.target.value}]}
+        });
       })
-      //turn the text in our input into a display item, clear it out of the input
-      document.querySelector("#one").addEventListener("keydown", function(e) {
-        console.log(e.target)
-        if(e.keyCode == 13 && e.target.value){
-          items.push({text: e.target.value});
-          e.target.value = "";
-          //eat this key so the input doesn't see it
-          e.stopPropagation();
-          e.preventDefault();
-        }
-      });
     </script>
   </body>
 </html>

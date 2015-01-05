@@ -7,12 +7,10 @@
     <content select="icon"></content>
 
     <section id="value-input">
+      <placeholder>{{placeholder}}</placeholder>
       <content select="value"></content>
 
-      <preview-and-placeholder>
-        <content select="preview"></content>
-        <placeholder>{{placeholder}}</placeholder>
-      </preview-and-placeholder>
+      <content select="preview"></content>
 
       <section id="html-input">
         <template if="{{multiline}}">
