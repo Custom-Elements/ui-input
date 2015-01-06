@@ -6,7 +6,6 @@ This is a text input element, with a couple additional bits of awesome:
 
 
     moment = require 'moment'
-    _ = require 'lodash-node'
     require 'ui-styles/animations'
 
     Polymer 'ui-input',
@@ -172,7 +171,7 @@ to crush it
         @autocomplete = "off"
         @autocorrect = "off"
         @autocapitalize = "none"
-        @fireChange = _.debounce =>
+        @fireChange = @job 'elementChanged', =>
           @fire 'change', @value
         , 300
 
