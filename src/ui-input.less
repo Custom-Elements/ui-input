@@ -1,5 +1,17 @@
 @import "../node_modules/ui-styles/variables";
 @import "../node_modules/ui-styles/visual-elements";
+
+.input-text {
+  color: @color-text;
+  box-sizing: border-box;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 :host {
   box-sizing: border-box;
   display: inline-flex;
@@ -22,7 +34,7 @@
         margin-right: 0;
       }
     }
-    preview, placeholder {
+    preview {
       display: inline-flex;
       margin: 0;
       padding-bottom: @pad;
@@ -39,9 +51,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content:flex-start;
+    line-height: @line-height;
+    font-size: 1em;
 
     margin: 0;
-    .transition(@transition);
+    padding: 0;
 
     #value-input {
       .transition(@transition);
@@ -51,40 +65,26 @@
       align-items: center;
       flex: 1;
       padding-bottom: @pad;
+      placeholder {
+        display: flex;
+      }
     }
 
-    #html-input {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    input, textarea, placeholder {
       flex: 1;
-      display: flex;
-      flex-wrap: no-wrap;
-      justify-content:flex-start;
-      align-items: center;
-      cursor: text;
-      input, textarea {
-        color: @color-text;
-        min-width: 25%;
-        box-sizing: border-box;
-        flex: 1;
-        height: 100%;
-        background-color: transparent;
-        line-height: @line-height;
-        outline: none;
-        border: none;
-        margin: 0;
-        padding: 0;
-        .transition(@transition);
-      }
-      input[type="date"]::-webkit-inner-spin-button,
-      input[type="datetime"]::-webkit-inner-spin-button,
-      input[type="datetime-local"]::-webkit-inner-spin-button,
-      input[type="month"]::-webkit-inner-spin-button,
-      input[type="time"]::-webkit-inner-spin-button,
-      input[type="week"]::-webkit-inner-spin-button {
-        display: none;
-      }
+      border: none;
+      outline: none;
+      padding: 0;
+      font-size: 1em;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="datetime"]::-webkit-inner-spin-button,
+    input[type="datetime-local"]::-webkit-inner-spin-button,
+    input[type="month"]::-webkit-inner-spin-button,
+    input[type="time"]::-webkit-inner-spin-button,
+    input[type="week"]::-webkit-inner-spin-button {
+      display: none;
     }
   }
 }
@@ -99,14 +99,12 @@
 
 :host([disabled]) {
   #field {
-    #html-input {
-      input, textarea {
-        color: @color-disabled-text;
-      }
+    placeholder {
+      color: @color-disabled-text;
     }
-  }
-  placeholder {
-    color: @color-disabled-text;
+    input, textarea {
+      color: @color-disabled-text;
+    }
   }
 }
 
@@ -118,7 +116,8 @@
   }
 }
 
-input, textarea {
+input, textarea, #value-input {
   font-family: inherit;
   font-weight: inherit;
+  line-height: inherit;
 }

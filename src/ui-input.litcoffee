@@ -26,11 +26,9 @@ Some values will need to be parsed and typed.
       valueChanged: (oldValue, newValue)->
         placeholder = @shadowRoot.querySelector('placeholder')
         if @value
-          placeholder.fadeOut ->
-            placeholder.setAttribute 'hidden', ''
-        else
-          placeholder.fadeIn ->
-            placeholder.removeAttribute 'hidden'
+          placeholder.fadeOut()
+        else if not @hasAttribute 'focused'
+          placeholder.fadeIn()
         @fireChange()
 
 ###placeholder
@@ -94,17 +92,22 @@ When leaving, show the preview if present, this works together with inputFocus
 
       blur: (evt) ->
         preview = @querySelector('preview')
+        placeholder = @shadowRoot.querySelector('placeholder')
         input = @$.input
-        if preview or not @value
+        @removeAttribute 'focused'
+        if preview
           input.fadeOut =>
-            @removeAttribute 'focused'
             @$.input.setAttribute 'invisible', ''
+            @$.input.removeAttribute 'hidden'
             if preview and @value
-              preview.removeAttribute 'hidden'
               preview.fadeIn =>
                 @bubble evt
-        else
-          @removeAttribute 'focused'
+        else if not @value
+          input.fadeOut =>
+            @$.input.setAttribute 'invisible', ''
+            @$.input.removeAttribute 'hidden'
+        if not @value
+          placeholder.fadeIn()
 
 This gets a bit complicated to have an animation showing the
 actual input control, hiding a preview -- but only if there is a preview.
@@ -118,16 +121,25 @@ to crush it
           return
         if not @hasAttribute 'focused'
           @setAttribute 'focused', ''
-          preview = @querySelector('preview')
-          input = @$.input
-          if preview
-            preview.fadeOut =>
-              preview.setAttribute 'hidden', ''
-          input.removeAttribute 'invisible'
-          input.fadeIn =>
+          done = =>
             @resize() if @multiline?
             @bubble evt
             input.focus()
+          preview = @querySelector('preview')
+          placeholder = @shadowRoot.querySelector('placeholder')
+          input = @$.input
+          placeholder.fadeOut()
+          if preview
+            placeholder.fadeOut ->
+              preview.fadeOut ->
+                input.removeAttribute 'invisible'
+                input.fadeIn =>
+                  done()
+          else
+            placeholder.fadeOut ->
+              input.removeAttribute 'invisible'
+              input.fadeIn =>
+                done()
 
       focus: ->
         @$.input.focus()
@@ -167,9 +179,7 @@ to crush it
       ready: ->
 
       attached: ->
-        preview = @querySelector('preview')
-        if preview
-          preview.setAttribute 'hidden', ''
+        @querySelector('preview')?.fadeOut()
         @blur()
 
       domReady: ->
