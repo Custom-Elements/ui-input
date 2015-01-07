@@ -6,7 +6,6 @@ This is a text input element, with a couple additional bits of awesome:
 
 
     moment = require 'moment'
-    _ = require 'lodash-node'
     require 'ui-styles/animations'
 
     Polymer 'ui-input',
@@ -128,18 +127,18 @@ to crush it
           preview = @querySelector('preview')
           placeholder = @shadowRoot.querySelector('placeholder')
           input = @$.input
-          placeholder.fadeOut()
-          if preview
-            placeholder.fadeOut ->
-              preview.fadeOut ->
+          placeholder.fadeOut ->
+            if preview
+              placeholder.fadeOut ->
+                preview.fadeOut ->
+                  input.removeAttribute 'invisible'
+                  input.fadeIn ->
+                    done()
+            else
+              placeholder.fadeOut ->
                 input.removeAttribute 'invisible'
-                input.fadeIn =>
+                input.fadeIn ->
                   done()
-          else
-            placeholder.fadeOut ->
-              input.removeAttribute 'invisible'
-              input.fadeIn =>
-                done()
 
       focus: ->
         @$.input.focus()
@@ -165,6 +164,11 @@ to crush it
       drop: (evt) ->
         @resize() if @multiline?
 
+      fireChange: ->
+        @job 'change', ->
+          @fire 'change', @value
+        , 300
+
 ##Polymer Lifecycle
 
       created: ->
@@ -172,9 +176,6 @@ to crush it
         @autocomplete = "off"
         @autocorrect = "off"
         @autocapitalize = "none"
-        @fireChange = _.debounce =>
-          @fire 'change', @value
-        , 300
 
       ready: ->
 
