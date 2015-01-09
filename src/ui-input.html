@@ -7,9 +7,9 @@
     <content select="icon"></content>
 
     <section id="value-input">
-      <placeholder>{{placeholder}}</placeholder>
       <content select="value"></content>
       <content select="preview"></content>
+      <placeholder>{{placeholder}}</placeholder>
       <template if="{{multiline}}">
         <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
           aria-labelledby="placeholder" aria-invalid="{{invalid}}" on-change="{{change}}" on-focus="{{inputFocus}}"
