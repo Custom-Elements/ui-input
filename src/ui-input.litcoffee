@@ -101,12 +101,16 @@ When leaving, show the preview if present, this works together with inputFocus
             if preview and @value
               preview.fadeIn =>
                 @bubble evt
-        else if not @value
-          input.fadeOut =>
-            @$.input.setAttribute 'invisible', ''
-            @$.input.removeAttribute 'hidden'
-        if not @value
-          placeholder.fadeIn()
+            else
+              placeholder.fadeIn()
+        else
+          if not @value
+            input.fadeOut =>
+              @$.input.setAttribute 'invisible', ''
+              @$.input.removeAttribute 'hidden'          
+              placeholder.fadeIn()
+        @$.input.blur()
+        
 
 This gets a bit complicated to have an animation showing the
 actual input control, hiding a preview -- but only if there is a preview.
