@@ -12,7 +12,7 @@ This is a text input element, with a couple additional bits of awesome:
 
 ##Events
 ###change
-Fired when the `value` changes.
+Fired when the `value` changes. This is a tad debounced.
 
 ##Attributes and Change Handlers
 ###multiline
@@ -107,10 +107,10 @@ When leaving, show the preview if present, this works together with inputFocus
           if not @value
             input.fadeOut =>
               @$.input.setAttribute 'invisible', ''
-              @$.input.removeAttribute 'hidden'          
+              @$.input.removeAttribute 'hidden'
               placeholder.fadeIn()
         @$.input.blur()
-        
+
 
 This gets a bit complicated to have an animation showing the
 actual input control, hiding a preview -- but only if there is a preview.
