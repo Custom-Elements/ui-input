@@ -124,13 +124,15 @@ to crush it
           return
         if not @hasAttribute 'focused'
           @setAttribute 'focused', ''
-          done = =>
-            @resize() if @multiline?
-            @bubble evt
-            input.focus()
           preview = @querySelector('preview')
           placeholder = @shadowRoot.querySelector('placeholder')
           input = @$.input
+          done = =>
+            console.log 'focus', @
+            @resize() if @multiline?
+            @bubble evt
+            input.scrollIntoView(false)
+            input.focus()
           placeholder.fadeOut ->
             if preview
               placeholder.fadeOut ->
