@@ -149,8 +149,8 @@ to crush it
         @$.input.focus()
 
       change: (evt) ->
+        evt.stopPropagation()
         @resize() if @multiline?
-        @bubble evt
 
       keyup: (evt) ->
         @value = evt.target.value
