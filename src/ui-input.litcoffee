@@ -128,7 +128,6 @@ to crush it
           placeholder = @shadowRoot.querySelector('placeholder')
           input = @$.input
           done = =>
-            console.log 'focus', @
             @resize() if @multiline?
             @bubble evt
             input.scrollIntoView(false)
