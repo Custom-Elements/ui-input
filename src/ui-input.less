@@ -70,11 +70,15 @@
       flex: 1;
       placeholder {
         display: flex;
+        align-self:flex-start;
       }
     }
 
     input, textarea, placeholder {
-      flex: 1;
+      flex:1;
+      &[invisible] {
+        flex-grow:0;
+      }      
       border: none;
       outline: none;
       padding: 0;

@@ -5,10 +5,9 @@
   <section id="field" on-keydown="{{keydown}}" on-focusout="{{focusOut}}" on-click="{{focusIn}}" on-focusin="{{focusIn}}" class="{{ {disabled: disabled} | tokenList }}">
 
     <content select="icon"></content>
-
     <section id="value-input">
       <content select="value"></content>
-      <content select="preview"></content>
+      <content select="preview"></content>  
       <placeholder>{{placeholder}}</placeholder>
       <template if="{{multiline}}">
         <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
@@ -28,12 +27,3 @@
 </template>
 <script src="./ui-input.litcoffee"></script>
 </polymer-element>
-
-<!-- 
-on-change="{{change}}" on-focusin="{{inputFocus}}"
-          on-focusout="{{focusOut}}"  
-
-on-change="{{change}}"
-          on-focus="{{inputFocus}}" on-blur="{{blur}}" 
-
-          -->

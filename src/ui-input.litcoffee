@@ -100,6 +100,7 @@ When leaving, show the preview if present, this works together with focusIn
             input.fadeOut =>
               @$.input.setAttribute 'invisible', ''
               @$.input.removeAttribute 'hidden'
+              console.log "hit me"
               placeholder.fadeIn()
 
 This gets a bit complicated to have an animation showing the
