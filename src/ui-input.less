@@ -50,7 +50,6 @@
     box-sizing: border-box;
     flex: 1;
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
     line-height: @line-height;
@@ -68,17 +67,25 @@
       justify-content:flex-start;
       align-items: center;
       flex: 1;
+      flex-wrap: wrap;
       placeholder {
         display: flex;
         align-self:flex-start;
       }
     }
 
-    input, textarea, placeholder {
+    placeholder {
+      flex-grow:0;
+    }
+
+    input, textarea,  {
       flex:1;
       &[invisible] {
         flex-grow:0;
-      }      
+      }
+    }
+
+    input, textarea, placeholder { 
       border: none;
       outline: none;
       padding: 0;
