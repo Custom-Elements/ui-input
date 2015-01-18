@@ -51,7 +51,20 @@
       <ui-input multiline="4" placeholder="I am a textarea">
         <icon tasks></icon>
       </ui-input>      
+
+      <ui-input multiline="2" id="robot" placeholder="Robots eat food too">
+        <icon android></icon>
+        <preview>
+          <icon beer></icon>&nbsp;
+          <template id="robots" bind="{{robots}}">
+            <value>{{}}</value>
+          </template>
+        </preview>
+
+      </ui-input>      
       
+
+
     </form>
 
     <script>
@@ -62,6 +75,10 @@
         document.querySelector("#mom").addEventListener("change", function(e) {
           document.querySelector('#moms').model = {stuff: [{text: e.target.value}]}
         });
+        document.querySelector("#robot").addEventListener("change", function(e) {
+          document.querySelector('#robots').model = {robots: e.target.value }
+        });
+
       })
     </script>
   </body>
