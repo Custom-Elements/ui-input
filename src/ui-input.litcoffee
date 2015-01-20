@@ -28,7 +28,6 @@ Some values will need to be parsed and typed.
           placeholder.fadeOut()
         else if not @hasAttribute 'focused'
           placeholder.fadeIn()
-        @resize() if @multiline?
         @fireChange()
 
 ###placeholder
@@ -64,16 +63,6 @@ Make `value` conform to the expectations of HTML input controls.
             moment(value).utc().format("YYYY-MM-DD")
           else
             value
-
-###resize
-Resize to the content, eliminating pesky scrolling. This only works when
-`multiline="true"`.
-
-      resize: ->
-        textarea = @shadowRoot.querySelector 'textarea'
-        setTimeout ->
-          textarea.style.height = 'auto'
-          textarea.style.height = "#{textarea.scrollHeight+2}px"
 
 ##Event Handlers
 
@@ -114,7 +103,7 @@ to crush it
           return
         if not @hasAttribute 'focused'
           @setAttribute 'focused', ''
-          
+
           preview = @querySelector('preview')
           placeholder = @shadowRoot.querySelector('placeholder')
           input = @$.input

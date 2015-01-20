@@ -7,7 +7,7 @@
     <content select="icon"></content>
     <section id="value-input">
       <content select="value"></content>
-      <content select="preview"></content>  
+      <content select="preview"></content>
       <placeholder>{{placeholder}}</placeholder>
       <template if="{{multiline}}">
         <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
@@ -18,7 +18,7 @@
       <template if="{{!multiline}}">
         <input type="{{type}}" id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
           autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
-          aria-labelledby="placeholder" aria-invalid="{{invalid}}" 
+          aria-labelledby="placeholder" aria-invalid="{{invalid}}"
           autofocus?="{{autofocus}}"></input>
       </template>
     </section>
