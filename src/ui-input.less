@@ -23,6 +23,7 @@
   ::content {
     > icon {
       .transition(@transition);
+      align-self: flex-start;
       margin-right: 1em;
       font-size: 1em;
       line-height: @line-height;
@@ -52,7 +53,7 @@
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch;
     line-height: @line-height;
     font-size: 1em;
 
@@ -142,6 +143,12 @@ input, textarea, #value-input {
   line-height: inherit;
 }
 
+input {
+  align-self: stretch
+}
+
 textarea {
   overflow: scroll;
+  resize: none;
+  align-self: stretch
 }

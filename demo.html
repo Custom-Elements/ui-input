@@ -15,6 +15,9 @@
       form {
         padding: 1em;
       }
+      #huge {
+        height: 10em;
+      }
     </style>
   </head>
   <body unresolved>
@@ -45,14 +48,14 @@
       <ui-input placeholder="Not Editable" disabled>
         <icon warning></icon>
       </ui-input>
-      <ui-input multiline="10">
+      <ui-input multiline="true" id="huge" placeholder="Giant">
         <icon tasks></icon>
       </ui-input>
-      <ui-input multiline="4" placeholder="I am a textarea">
+      <ui-input multiline="true" placeholder="I am a textarea">
         <icon tasks></icon>
       </ui-input>
 
-      <ui-input multiline="2" id="robot" placeholder="Robots eat food too">
+      <ui-input multiline="true" id="robot" placeholder="Robots eat food too">
         <icon android></icon>
         <preview>
           <icon beer></icon>&nbsp;

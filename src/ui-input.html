@@ -13,7 +13,7 @@
         <textarea id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"
           aria-labelledby="placeholder" aria-invalid="{{invalid}}"
           autocorrect="{{autocorrect}}" autocapitalize="{{autocapitalize}}" autocomplete="{{autocomplete}}"
-          autofocus?="{{autofocus}}" rows="{{multiline || 1}}"></textarea>
+          autofocus?="{{autofocus}}"></textarea>
       </template>
       <template if="{{!multiline}}">
         <input type="{{type}}" id="input" value="{{value | scrubValue}}" disabled?="{{disabled}}"

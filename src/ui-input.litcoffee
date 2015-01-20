@@ -140,6 +140,10 @@ to crush it
       ready: ->
 
       attached: ->
+        if @hasAttribute 'multiline'
+          @multiline = true
+        else
+          @multiline = false
         @querySelector('preview')?.fadeOut()
         @focusOut()
 
