@@ -14,6 +14,9 @@ This is a text input element, with a couple additional bits of awesome:
 ###change
 Fired when the `value` changes. This is a tad debounced.
 
+###edit
+Fired on a change when there is focus, like a real human typed it.
+
 ##Attributes and Change Handlers
 ###multiline
 Set this to true to create a multiline, self resizing input.
@@ -129,6 +132,8 @@ to crush it
       fireChange: ->
         @job 'change', ->
           @fire 'change', @value
+          if @hasAttribute 'focused'
+            @fire 'edit', @value
         , 300
 
 ##Polymer Lifecycle
