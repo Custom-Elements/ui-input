@@ -24,10 +24,10 @@ Some values will need to be parsed and typed.
 
       valueChanged: (oldValue, newValue)->
         placeholder = @shadowRoot.querySelector('placeholder')
-        if @value
+        if not @hasAttribute 'focused'
+          @focusOut()
+        else if @value
           placeholder.fadeOut()
-        else if not @hasAttribute 'focused'
-          placeholder.fadeIn()
         @fireChange()
 
 ###placeholder
@@ -82,7 +82,9 @@ When leaving, show the preview if present, this works together with focusIn
             @$.input.removeAttribute 'hidden'
             if preview and @value
               preview.fadeIn()
+              placeholder.fadeOut()
             else
+              preview.fadeOut()
               placeholder.fadeIn()
         else
           if not @value
