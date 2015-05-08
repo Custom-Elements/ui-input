@@ -52,6 +52,15 @@ off (default) or off to disable corrections
 off (default) or off to disable completion
 
 ##Methods
+### hideValue
+Hide away / show the value display.
+
+      hideValue: ->
+        @$.value.fadeOut()
+
+      showValue: ->
+        @$.value.fadeIn() 
+
 ###scrubValue
 Make `value` conform to the expectations of HTML input controls.
 
